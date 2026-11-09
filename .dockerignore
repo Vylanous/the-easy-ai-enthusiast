@@ -1,0 +1,16 @@
+.git
+.env
+.env.*
+!.env.template
+node_modules
+**/node_modules
+**/dist
+**/dist-electron
+**/.turbo
+**/.expo
+**/*.db
+**/*.sqlite*
+credentials
+test-results
+.runable
+task.md
