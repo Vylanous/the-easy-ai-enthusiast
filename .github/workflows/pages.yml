@@ -1,0 +1,51 @@
+name: Deploy public learning hub
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.4'
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Validate the public content snapshot
+        run: bun tooling/validate-library.ts
+      - name: Type-check and build public mode
+        working-directory: packages/web
+        env:
+          VITE_WORKSPACE_URL: ${{ vars.WORKSPACE_URL }}
+          VITE_APPLICATION_ID: ${{ vars.APPLICATION_ID }}
+          APPLICATION_ID: ${{ vars.APPLICATION_ID }}
+        run: bunx tsc --noEmit && bunx vite build --mode public
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: packages/web/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy the public hub
+        id: deployment
+        uses: actions/deploy-pages@v4
