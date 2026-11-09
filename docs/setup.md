@@ -2,7 +2,9 @@
 
 ## Current implementation status
 
-The public dashboard is implemented locally with 24 curated resources, search, topic/type filters, detail views, copy/download actions, responsive navigation, and text-free artwork. The GitHub repository has been created. The full source push and GitHub Pages deployment require authenticated Git/setup access.
+The public dashboard has 24 curated resources, search, topic/type filters, detail views, copy/download actions, responsive navigation, and text-free artwork. Full source and assets have been pushed to GitHub. Pages is live and browser-tested at https://vylanous.github.io/the-easy-ai-enthusiast/.
+
+Verified initial deployment: https://github.com/Vylanous/the-easy-ai-enthusiast/actions/runs/42575338048 (build and deploy succeeded). Live tests passed search/filter, copy/download, detail refresh, mobile navigation, and 320–1440px layouts without JavaScript errors or failed HTTP responses.
 
 The secure workspace is **not implemented or deployed yet**. Its route deliberately shows setup status rather than fake login or locally stored private tasks. Render/Turso/Google/Resend integration and owner publishing remain the next implementation stage. Nothing has been changed on the existing Vylanous.com website or DNS.
 
@@ -24,7 +26,7 @@ Set Settings → Pages → Build and deployment → Source to **GitHub Actions**
 Optional repository variables:
 
 - `WORKSPACE_URL`: the actual Render origin, once the secure app is ready. Omit it until then; public workspace links show honest setup status.
-- `APPLICATION_ID`: the nonsecret app ID used by the required analytics integration.
+- The nonsecret analytics app ID is set directly in the workflow. It does not require a repository variable or credential.
 
 There are no database/authentication secrets in the Pages workflow or public build. The seeded snapshot is committed, so Render is not needed for the initial public site.
 

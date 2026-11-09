@@ -7,7 +7,8 @@ An illustrated AI command center for curious people who build. Advanced prompts,
 - Public GitHub repository created: https://github.com/Vylanous/the-easy-ai-enthusiast
 - Public dashboard implemented locally: 24 original resources, search, filters, readable detail views, copy/download buttons, and responsive navigation.
 - Reference-inspired dark navy/lime/cyan artwork recreated **without lettering**. All wording is live accessible website text.
-- GitHub Pages build workflow prepared locally; full source push and public deployment await secure Git/setup credentials.
+- Full source and artwork committed to the public repository.
+- Public dashboard live: https://vylanous.github.io/the-easy-ai-enthusiast/ — GitHub Actions deployment succeeded and live browser tests passed (all 24 resources, search/filter, copy/download, detail refresh, mobile navigation, and 320–1440px layouts).
 - Private workspace, login, Turso CRUD, Resend account email, Render deployment, and automatic owner publishing are **pending implementation/configuration**, not active features.
 
 The existing Vylanous.com website, Render service, and DNS are untouched.
