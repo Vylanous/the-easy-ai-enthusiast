@@ -12,5 +12,6 @@ node_modules
 **/*.sqlite*
 credentials
 test-results
-.runable
+.runable/*
+!.runable/ports.json
 task.md
