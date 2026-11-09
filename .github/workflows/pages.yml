@@ -28,8 +28,8 @@ jobs:
         working-directory: packages/web
         env:
           VITE_WORKSPACE_URL: ${{ vars.WORKSPACE_URL }}
-          VITE_APPLICATION_ID: ${{ vars.APPLICATION_ID }}
-          APPLICATION_ID: ${{ vars.APPLICATION_ID }}
+          VITE_APPLICATION_ID: theeasy-3qwbiaf
+          APPLICATION_ID: theeasy-3qwbiaf
         run: bunx tsc --noEmit && bunx vite build --mode public
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
