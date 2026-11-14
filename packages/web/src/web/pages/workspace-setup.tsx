@@ -1,7 +1,22 @@
 import { Link } from 'wouter';
-import { ArrowLeft, ArrowUpRight, Check, Database, KeyRound, LockKeyhole, Mail, Server } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Github, ShieldCheck } from 'lucide-react';
 import { repositoryUrl } from '../lib/site-config';
 
 export default function WorkspaceSetup() {
-  return <div className="page setup-page"><Link href="/" className="back-link"><ArrowLeft size={14} /> Back to the public hub</Link><div className="setup-title"><div className="setup-icon"><LockKeyhole size={30} /></div><div className="eyebrow">THE PRIVATE SIDE OF YOUR COMMAND CENTER</div><h1>Your workspace needs its secure connection.</h1><p>The public learning hub is ready to explore. Private content, saved resources, and persistent tasks require the Render backend and account services to be configured first.</p></div><div className="setup-panel"><div className="section-label"><span>LAUNCH CONFIGURATION</span><span className="small-tag">NOT CONNECTED YET</span></div>{[{ icon: Server, title: 'Render', text: 'A new secure web service. Your existing Vylanous.com site remains untouched.' }, { icon: Database, title: 'Turso', text: 'User-owned database credentials for persistent private resources and tasks.' }, { icon: KeyRound, title: 'Google + verified email login', text: 'Your OAuth client and a real Render callback address. No simulated accounts.' }, { icon: Mail, title: 'Resend', text: 'A verified sender for account verification and password-reset emails.' }].map(({ icon: Icon, title, text }) => <div className="setup-row" key={title}><Icon size={20} /><div><h3>{title}</h3><p>{text}</p></div><span className="setup-pending">SETUP NEEDED</span></div>)}<div className="setup-assurance"><Check size={16} /> Private data and credentials will never be included in the public GitHub Pages build.</div></div><div className="setup-actions"><Link href="/library" className="button primary">Explore the public library <ArrowUpRight size={16} /></Link><a href={repositoryUrl} target="_blank" rel="noreferrer" className="button secondary">Open the repository <ArrowUpRight size={15} /></a></div></div>;
+  return <div className="page setup-page">
+    <Link href="/" className="back-link"><ArrowLeft size={14} /> Back to the public hub</Link>
+    <div className="setup-title">
+      <div className="setup-icon"><Github size={30} /></div>
+      <div className="eyebrow">HOSTED ONLY ON GITHUB PAGES</div>
+      <h1>A public library. No account required.</h1>
+      <p>This entire website is hosted on GitHub Pages. There is no separate workspace server, sign-in service, or private database.</p>
+    </div>
+    <div className="setup-panel">
+      <div className="section-label"><span>GITHUB PAGES ONLY</span><span className="small-tag">STATIC WEBSITE</span></div>
+      <div className="setup-row"><Github size={20} /><div><h3>Explore, copy, and download</h3><p>All public prompts, guides, agent specifications, and challenges work directly on this website.</p></div></div>
+      <div className="setup-row"><ShieldCheck size={20} /><div><h3>Private workspace features are unavailable</h3><p>Sign-in and save-to-workspace links explain this limitation. No account is created and no private resource or task progress is stored. Download a resource to keep your own copy.</p></div></div>
+      <div className="setup-assurance"><ShieldCheck size={16} /> GitHub Pages cannot run a private backend. No credentials or private data are included in this site.</div>
+    </div>
+    <div className="setup-actions"><Link href="/library" className="button primary">Explore the public library <ArrowUpRight size={16} /></Link><a href={repositoryUrl} target="_blank" rel="noreferrer" className="button secondary">Open the repository <ArrowUpRight size={15} /></a></div>
+  </div>;
 }

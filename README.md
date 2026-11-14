@@ -1,23 +1,16 @@
 # The Easy AI Enthusiast
 
-An illustrated AI command center for curious people who build. Advanced prompts, practical guides, reusable agent specifications, and hands-on challenges.
+An AI learning hub with 24 original resources, search, filters, detail views, copy/download actions, and responsive navigation.
 
-## Status
+## Website
 
-- Public GitHub repository created: https://github.com/Vylanous/the-easy-ai-enthusiast
-- Public dashboard implemented locally: 24 original resources, search, filters, readable detail views, copy/download buttons, and responsive navigation.
-- Reference-inspired dark navy/lime/cyan artwork recreated **without lettering**. All wording is live accessible website text.
-- Full source and artwork committed to the public repository.
-- Public dashboard live: https://vylanous.github.io/the-easy-ai-enthusiast/ — GitHub Actions deployment succeeded and live browser tests passed (all 24 resources, search/filter, copy/download, detail refresh, mobile navigation, and 320–1440px layouts).
-- Private workspace, login, Turso CRUD, Resend account email, Render deployment, and automatic owner publishing are **pending implementation/configuration**, not active features.
+https://vylanous.github.io/the-easy-ai-enthusiast/
 
-The existing Vylanous.com website, Render service, and DNS are untouched.
+**GitHub Pages is the only production host.** The website is a static React/Vite build, deployed by `.github/workflows/pages.yml`. No Runable or Render deployment is used. Existing unrelated websites and DNS are not changed.
 
-## Architecture
+All builds use `/the-easy-ai-enthusiast/` asset paths and hash navigation so resource links survive refreshes. Any legacy `WORKSPACE_URL` workflow variable is ignored by the frontend. No database, authentication, or external server is required. The existing analytics integration is tracking, not website hosting.
 
-One managed Bun/Vite/React/Hono/Drizzle monorepo. Public mode exports a static snapshot for GitHub Pages with `/the-easy-ai-enthusiast/` asset paths and hash routing. The secure app is planned as a new Render web service backed by your external Turso database, with your own Google OAuth client and verified email/password login.
-
-No private API or login form is hosted on GitHub Pages. No live AI agents, automatic task runner, or client-side substitute for persistent private storage is bundled.
+Private accounts, saved workspace resources, and server-backed task progress are unavailable on this static site. Workspace links show these limitations rather than redirecting to another host. Copy/download remain available without an account.
 
 ## Development
 
@@ -25,22 +18,19 @@ No private API or login form is hosted on GitHub Pages. No live AI agents, autom
 bun install --frozen-lockfile
 bun tooling/validate-library.ts
 bun run dev
-bun run lint
-bun run build
-bunx --cwd packages/web vite build --mode public
+bun run build:web
 ```
 
-The preview runs on its assigned port from `__ports.cjs`. Keep the template-managed `__*` files and analytics integration intact.
+The retained monorepo server/mobile/desktop scaffolding is not deployed. The Vite development server serves only the frontend, and the standard web build exports a static Pages site.
 
-## Project map
+## Publishing
 
-- `packages/web/src/web/` — dashboard UI and routes.
-- `packages/web/src/shared/library.ts` — public resource schema.
-- `packages/web/public/content/library.json` — published seed snapshot.
-- `packages/web/public/images/` and `fonts/` — text-free illustration and licensed self-hosted fonts.
-- `.github/workflows/pages.yml` — static public-site build/deploy workflow.
-- `tooling/validate-library.ts` — snapshot checks.
-- `docs/setup.md` — launch prerequisites and provider configuration.
-- `docs/content-guide.md` — editorial standards and template boundaries.
+Commit changes to `main`. The existing GitHub Actions workflow validates content, type-checks the web app, builds the static site, and deploys `packages/web/dist` to GitHub Pages. Configure Settings → Pages → Source as **GitHub Actions**.
 
-Credentials belong only in the ignored root `.env`. Never push it, private database files, tokens, or user exports.
+- `packages/web/src/web/`: frontend.
+- `packages/web/public/content/library.json`: published resource snapshot.
+- `packages/web/public/`: fonts, artwork, and static assets.
+- `docs/setup.md`: Pages setup and verification.
+- `docs/content-guide.md`: editorial standards.
+
+Never commit credentials or private data. GitHub Pages content is public.
