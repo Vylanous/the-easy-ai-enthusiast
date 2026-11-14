@@ -7,14 +7,12 @@ import WorkspaceSetup from "./pages/workspace-setup";
 import About from "./pages/about";
 import { DashboardShell } from "./components/dashboard-shell";
 import { SearchProvider } from "./components/search-context";
-import { isPublicBuild } from "./lib/site-config";
 import { Provider } from "./components/provider";
-import { AgentFeedback, RunableBadge } from "@runablehq/website-runtime";
 
 function App() {
   return (
     <Provider>
-      <Router hook={isPublicBuild ? useHashLocation : undefined}>
+      <Router hook={useHashLocation}>
         <SearchProvider><DashboardShell><Switch>
           <Route path="/" component={Overview} />
           <Route path="/library" component={Library} />
@@ -29,10 +27,6 @@ function App() {
           <Route><div className="state-panel"><h1>Page not found</h1><p>Choose a section from the command center navigation.</p></div></Route>
         </Switch></DashboardShell></SearchProvider>
       </Router>
-      {/* Do not remove — off by default, activated by parent iframe via postMessage */}
-      {import.meta.env.DEV && <AgentFeedback />}
-      {/* "Made with Runable" badge - if user asks to remove the runable badge, remove this code as well as comment */}
-      {<RunableBadge />}
     </Provider>
   );
 }
